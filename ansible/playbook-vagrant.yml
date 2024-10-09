@@ -22,3 +22,10 @@
 
 - name: 'Run playbook-all_nodes-minimal_bashrc.yml'
   ansible.builtin.import_playbook: playbook-all_nodes-minimal_bashrc.yml
+
+#
+# LLDAP
+#
+
+- name: 'Run playbook-all_nodes-add_home-ojkastl_buildservice_Branch_network_ldap.yml'
+  ansible.builtin.import_playbook: playbook-all_nodes-add_home-ojkastl_buildservice_Branch_network_ldap.yml

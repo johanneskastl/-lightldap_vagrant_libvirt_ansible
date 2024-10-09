@@ -3,3 +3,6 @@
 #
 .vagrant
 Vagrantfile.1
+
+# group_vars file with secret_key for LLDAP
+ansible/group_vars/all/lldap_secret_key.yml

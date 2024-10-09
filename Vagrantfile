@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
 
   # name the VMs
-  config.vm.define "leap156" do |node|
+  config.vm.define "lldap" do |node|
 
     # which image to use
     node.vm.box = "opensuse/Leap-15.6.x86_64"
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     end
 
     # set the hostname
-    node.vm.hostname = "leap156"
+    node.vm.hostname = "lldap"
 
     # disable shared folders
     node.vm.synced_folder ".", "/vagrant", disabled: true

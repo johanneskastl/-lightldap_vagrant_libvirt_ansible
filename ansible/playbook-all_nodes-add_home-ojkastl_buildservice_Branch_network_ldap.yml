@@ -1,0 +1,20 @@
+---
+- name: 'Add the Branch_network_ldap zypper repository'
+  hosts: 'all'
+  gather_facts: true
+  become: true
+
+  roles:
+    - role: 'johanneskastl.add_zypper_repository'
+      repository_name: 'home-ojkastl_buildservice-Branch_network_ldap'
+      repository_baseurl: "https://download.opensuse.org/repositories/home:/ojkastl_buildservice:/Branch_network_ldap/openSUSE_Tumbleweed/"
+      auto_import_keys: '1'
+      when:
+        - ansible_distribution == "openSUSE Tumbleweed"
+
+    - role: 'johanneskastl.add_zypper_repository'
+      repository_name: 'home-ojkastl_buildservice-Branch_network_ldap'
+      repository_baseurl: "https://download.opensuse.org/repositories/home:/ojkastl_buildservice:/Branch_network_ldap/{{ ansible_distribution_version }}/"
+      auto_import_keys: '1'
+      when:
+        - ansible_distribution == "openSUSE Leap"

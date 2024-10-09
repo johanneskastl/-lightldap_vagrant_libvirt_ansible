@@ -57,3 +57,7 @@
         state: 'started'
         enabled: true
         daemon_reload: true
+
+    - name: 'Output the ldapsearch command'
+      ansible.builtin.debug:
+        msg: "ldapsearch -H ldap://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}:3890 -w totallynotsecure -D cn=admin,ou=people,dc=example,dc=com -b dc=example,dc=com"

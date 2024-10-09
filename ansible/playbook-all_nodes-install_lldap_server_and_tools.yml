@@ -11,3 +11,4 @@
         - lldap-set-password
         - lldap-migration-tool
         - lldap-cli
+        - openldap2-client

@@ -32,3 +32,6 @@
 
 - name: 'Run playbook-all_nodes-install_lldap_server_and_tools.yml'
   ansible.builtin.import_playbook: playbook-all_nodes-install_lldap_server_and_tools.yml
+
+- name: 'Run playbook-all_nodes-configure_and_start_lldap.yml'
+  ansible.builtin.import_playbook: playbook-all_nodes-configure_and_start_lldap.yml

@@ -78,6 +78,15 @@ Vagrantfile, please beware that this will break the Ansible provisioning.
    # numEntries: 4
    ```
 
+1. Log out and run the `ldapsearch` command, that was printed out at the end of
+   the Ansible provisioning, from your Ansible control node. This command has
+   the VM's IP address in it. e.g.
+
+   ```
+   ldapsearch -H ldap://192.0.2.13:3890 -w totallynotsecure -D cn=admin,ou=people,dc=example,dc=com -b dc=example,dc=com
+   ```
+
+   The result should be the same as above.
 1. Party!
 
 ## Cleaning up

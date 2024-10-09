@@ -29,3 +29,6 @@
 
 - name: 'Run playbook-all_nodes-add_home-ojkastl_buildservice_Branch_network_ldap.yml'
   ansible.builtin.import_playbook: playbook-all_nodes-add_home-ojkastl_buildservice_Branch_network_ldap.yml
+
+- name: 'Run playbook-all_nodes-install_lldap_server_and_tools.yml'
+  ansible.builtin.import_playbook: playbook-all_nodes-install_lldap_server_and_tools.yml

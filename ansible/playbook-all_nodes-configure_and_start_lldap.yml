@@ -1,0 +1,59 @@
+---
+- name: 'Configure and start lldap'
+  hosts: 'all'
+  gather_facts: true
+  become: true
+
+  handlers:
+
+    - name: 'Restart the lldap service'
+      ansible.builtin.systemd:
+        name: 'lldap'
+        state: 'restarted'
+        daemon_reload: true
+
+  tasks:
+
+    - name: 'Set fact for rpc_secret_key'
+      ansible.builtin.set_fact:
+        lldap_secret_key: |-
+          {{lookup(
+          'community.general.random_string',
+          length=64,
+          base64=False,
+          upper=false,
+          lower=false,
+          numbers=false,
+          override_special='0123456789abcdef'
+          ) }}
+      when:
+        - 'lldap_secret_key is undefined'
+
+    - name: 'Create a local file with the LLDAP secret key'
+      ansible.builtin.template:
+        src: 'lldap_secret_key.yml.j2'
+        dest: "{{ playbook_dir }}/group_vars/all/lldap_secret_key.yml"
+        mode: '0600'
+      # create the file on the Ansible control host
+      delegate_to: 'localhost'
+      become: false
+
+    - name: 'Run facts module to get latest information'
+      ansible.builtin.setup:
+
+    - name: 'Create the configuration file'
+      ansible.builtin.template:
+        src: 'lldap_config.toml.j2'
+        dest: '/etc/lldap/lldap_config.toml'
+        owner: 'root'
+        group: 'lldap'
+        mode: '0640'
+      notify:
+        - 'Restart the lldap service'
+
+    - name: 'Start and enable the lldap service'
+      ansible.builtin.systemd:
+        name: 'lldap'
+        state: 'started'
+        enabled: true
+        daemon_reload: true
